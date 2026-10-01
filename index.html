@@ -302,7 +302,7 @@ nav {
 
 .hero-logo {
   flex-shrink: 0;
-  width: 200px;
+  width: 320px;
 }
 
 .hero-logo img {
@@ -480,6 +480,71 @@ section h2 {
   transform: translateY(-2px);
 }
 
+/* Video */
+.video-container {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.video-player {
+  position: relative;
+  border-radius: 12px;
+  overflow: hidden;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  box-shadow: 0 8px 32px rgba(0,0,0,0.08);
+  aspect-ratio: 16 / 9;
+}
+
+.video-player video {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+}
+
+.video-overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  background: linear-gradient(135deg, var(--cobalt) 0%, rgba(26,54,93,0.85) 100%);
+  transition: opacity 0.4s;
+}
+
+.video-overlay.hidden-overlay {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.play-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  transition: transform 0.3s;
+  padding: 0;
+}
+
+.play-btn:hover {
+  transform: scale(1.15);
+}
+
+.play-btn:focus-visible {
+  outline: 2px solid var(--cyan);
+  outline-offset: 4px;
+  border-radius: 50%;
+}
+
+.video-caption {
+  color: rgba(255,255,255,0.8);
+  font-size: 0.9375rem;
+  margin: 0;
+  text-align: center;
+}
+
 /* Contact */
 .contact-grid {
   display: grid;
@@ -561,7 +626,7 @@ footer strong {
     gap: 24px;
     text-align: center;
   }
-  .hero-logo { width: 140px; }
+  .hero-logo { width: 200px; }
   .hero p { max-width: none; }
   .hero-cta { width: 100%; justify-content: center; }
   section { padding: 44px 0; }
@@ -577,6 +642,7 @@ footer strong {
       <div class="nav-brand-text">KALB <span>Dev</span></div>
     </a>
     <ul class="nav-links">
+      <li><a href="#soluciones">Soluciones</a></li>
       <li><a href="#servicios">Servicios</a></li>
       <li><a href="#proceso">Proceso</a></li>
       <li><a href="#stack">Stack</a></li>
@@ -603,6 +669,30 @@ footer strong {
   </div>
 
 </div>
+
+<section id="soluciones" class="alt">
+  <div class="section-inner">
+    <div class="section-label reveal">Soluciones</div>
+    <h2 class="reveal">Conoce nuestro trabajo</h2>
+    <div class="video-container reveal">
+      <div class="video-player" id="videoPlayer">
+        <video id="demoVideo" controls playsinline poster="">
+          <source src="demo.mp4" type="video/mp4">
+          Tu navegador no soporta video HTML5.
+        </video>
+        <div class="video-overlay" id="videoOverlay">
+          <button class="play-btn" id="playBtn" aria-label="Reproducir video">
+            <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
+              <circle cx="24" cy="24" r="24" fill="var(--cyan)" opacity="0.9"/>
+              <path d="M19 15l14 9-14 9V15z" fill="#fff"/>
+            </svg>
+          </button>
+          <p class="video-caption">Descubre cómo transformamos ideas en software funcional</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 
 <section id="servicios" class="alt">
   <div class="section-inner">
@@ -772,4 +862,23 @@ const observer = new IntersectionObserver((entries) => {
 }, { threshold: 0.15, rootMargin: '0px 0px -40px 0px' });
 
 document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+const playBtn = document.getElementById('playBtn');
+const video = document.getElementById('demoVideo');
+const overlay = document.getElementById('videoOverlay');
+
+if (playBtn && video && overlay) {
+  playBtn.addEventListener('click', () => {
+    overlay.classList.add('hidden-overlay');
+    video.play();
+  });
+  video.addEventListener('pause', () => {
+    if (video.currentTime > 0 && !video.ended) {
+      overlay.classList.remove('hidden-overlay');
+    }
+  });
+  video.addEventListener('ended', () => {
+    overlay.classList.remove('hidden-overlay');
+  });
+}
 </script>
