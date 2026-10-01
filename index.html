@@ -381,8 +381,7 @@ nav.scrolled {
 .hero-logo img {
   width: 100%;
   height: auto;
-  filter: brightness(0) invert(1);
-  opacity: 0.85;
+  mix-blend-mode: lighten;
 }
 
 /* ═══ STATS BAR ═══ */
@@ -741,8 +740,8 @@ section h2 {
 /* ═══ CONTACT ═══ */
 .contact-layout {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 48px;
+  grid-template-columns: 1.2fr 0.8fr;
+  gap: 40px;
   align-items: start;
 }
 
@@ -812,6 +811,147 @@ section h2 {
 .contact-link .c-label {
   font-size: 0.75rem;
   color: var(--fg-muted);
+}
+
+/* ═══ FORM ═══ */
+.contact-form {
+  background: var(--bg-alt);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 36px 32px;
+}
+
+.contact-form h3 {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--cobalt);
+  margin: 0 0 6px;
+}
+
+.contact-form .form-subtitle {
+  color: var(--fg-muted);
+  font-size: 0.875rem;
+  margin: 0 0 24px;
+}
+
+.form-group {
+  margin-bottom: 16px;
+}
+
+.form-group label {
+  display: block;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: var(--fg);
+  margin-bottom: 6px;
+}
+
+.form-group input,
+.form-group textarea,
+.form-group select {
+  width: 100%;
+  padding: 10px 14px;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  color: var(--fg);
+  font-family: var(--font-body);
+  font-size: 0.9375rem;
+  transition: border-color 0.3s, box-shadow 0.3s;
+  outline: none;
+}
+
+.form-group input:focus,
+.form-group textarea:focus,
+.form-group select:focus {
+  border-color: var(--cyan);
+  box-shadow: 0 0 0 3px var(--cyan-glow);
+}
+
+.form-group textarea {
+  resize: vertical;
+  min-height: 100px;
+}
+
+.form-group select {
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg width='12' height='8' viewBox='0 0 12 8' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1.5L6 6.5L11 1.5' stroke='%2364748B' stroke-width='2' stroke-linecap='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 14px center;
+  padding-right: 36px;
+}
+
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.btn-submit {
+  width: 100%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  background: var(--cyan);
+  color: #fff;
+  padding: 14px 28px;
+  border-radius: 10px;
+  border: none;
+  cursor: pointer;
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 0.9375rem;
+  transition: all 0.3s;
+  position: relative;
+  overflow: hidden;
+  margin-top: 4px;
+}
+
+.btn-submit::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, transparent 0%, rgba(255,255,255,0.15) 50%, transparent 100%);
+  transform: translateX(-100%);
+  transition: transform 0.5s;
+}
+
+.btn-submit:hover::before { transform: translateX(100%); }
+.btn-submit:hover { background: var(--cyan-dark); transform: translateY(-2px); box-shadow: 0 6px 20px rgba(14,165,233,0.3); }
+
+.form-success {
+  text-align: center;
+  padding: 32px 0;
+}
+
+.form-success .check-icon {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: rgba(16,185,129,0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 16px;
+}
+
+.form-success h4 {
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: var(--cobalt);
+  margin: 0 0 8px;
+}
+
+.form-success p {
+  color: var(--fg-muted);
+  font-size: 0.875rem;
+  margin: 0;
+}
+
+@media (max-width: 480px) {
+  .form-row { grid-template-columns: 1fr; }
+  .contact-form { padding: 24px 20px; }
 }
 
 /* ═══ CTA BANNER ═══ */
@@ -1146,11 +1286,69 @@ footer {
 <!-- CONTACTO -->
 <section id="contacto">
   <div class="wrapper">
+    <div class="section-header">
+      <div class="section-label">Contacto</div>
+      <h2>Hablemos de tu proyecto</h2>
+      <p class="section-subtitle">Cuéntame tu idea y te respondo en menos de 24 horas. Sin compromiso.</p>
+    </div>
     <div class="contact-layout">
-      <div class="contact-text">
-        <div class="section-label" style="justify-content:flex-start">Contacto</div>
-        <h2>Hablemos de tu proyecto</h2>
-        <p>Cuéntame tu idea y te respondo en menos de 24 horas con una propuesta personalizada. Sin compromiso, sin letras pequeñas.</p>
+      <div class="contact-form" id="contactForm">
+        <h3>Envíame tu proyecto</h3>
+        <p class="form-subtitle">Completa el formulario y te respondo en menos de 24 horas</p>
+        <form id="leadForm" action="https://formsubmit.co/kh2905495@gmail.com" method="POST">
+          <input type="hidden" name="_subject" value="Nuevo lead desde KALB Dev">
+          <input type="hidden" name="_captcha" value="false">
+          <input type="hidden" name="_next" value="https://kevinherrera201.github.io/#gracias">
+          <input type="text" name="_honey" style="display:none">
+          <div class="form-row">
+            <div class="form-group">
+              <label for="nombre">Nombre</label>
+              <input type="text" id="nombre" name="nombre" placeholder="Tu nombre" required>
+            </div>
+            <div class="form-group">
+              <label for="empresa">Empresa</label>
+              <input type="text" id="empresa" name="empresa" placeholder="Nombre de tu empresa">
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="email">Email</label>
+              <input type="email" id="email" name="email" placeholder="tu@email.com" required>
+            </div>
+            <div class="form-group">
+              <label for="telefono">Teléfono / WhatsApp</label>
+              <input type="tel" id="telefono" name="telefono" placeholder="+502 0000 0000">
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="servicio">¿Qué necesitas?</label>
+            <select id="servicio" name="servicio" required>
+              <option value="" disabled selected>Selecciona un servicio</option>
+              <option value="Aplicación Web">Aplicación Web</option>
+              <option value="App Móvil">App Móvil</option>
+              <option value="Sistema Empresarial">Sistema Empresarial (ERP/CRM)</option>
+              <option value="API / Integración">API / Integración</option>
+              <option value="Automatización">Automatización de procesos</option>
+              <option value="Consultoría">Consultoría técnica</option>
+              <option value="Otro">Otro</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="mensaje">Cuéntame sobre tu proyecto</label>
+            <textarea id="mensaje" name="mensaje" placeholder="Describe brevemente lo que necesitas, plazos, presupuesto estimado..." rows="4"></textarea>
+          </div>
+          <button type="submit" class="btn-submit">
+            Enviar solicitud
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M2 8l5 5L14 3" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+        </form>
+        <div class="form-success" id="formSuccess" hidden>
+          <div class="check-icon">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#10B981" stroke-width="2.5" stroke-linecap="round"><path d="M5 13l4 4L19 7"/></svg>
+          </div>
+          <h4>Mensaje enviado</h4>
+          <p>Gracias por tu interés. Te contactaré en las próximas 24 horas.</p>
+        </div>
       </div>
       <div class="contact-links-list">
         <a class="contact-link" href="https://wa.me/message/4KDMZQ44EWJII1" target="_blank" rel="noopener">
