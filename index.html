@@ -1,0 +1,530 @@
+<title>Kevin Herrera Dev</title>
+<meta name="description" content="Desarrollo de software a medida — soluciones que se adaptan a tu negocio">
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Mono:wght@400;700&display=swap">
+
+<style>
+/* Dark-first professional dev portfolio — monospace accent on clean sans body */
+:root {
+  --bg: #0e1117;
+  --bg-elevated: #161b22;
+  --bg-card: #1c2128;
+  --fg: #e6edf3;
+  --fg-muted: #8b949e;
+  --accent: #58a6ff;
+  --accent-glow: rgba(88, 166, 255, 0.15);
+  --green: #3fb950;
+  --border: #30363d;
+  --font-body: 'Inter', system-ui, -apple-system, sans-serif;
+  --font-mono: 'Space Mono', 'Consolas', monospace;
+  color-scheme: dark;
+}
+
+@media (prefers-color-scheme: light) {
+  :root:not([data-theme="dark"]) {
+    --bg: #f6f8fa;
+    --bg-elevated: #ffffff;
+    --bg-card: #ffffff;
+    --fg: #1f2328;
+    --fg-muted: #656d76;
+    --accent: #0969da;
+    --accent-glow: rgba(9, 105, 218, 0.08);
+    --green: #1a7f37;
+    --border: #d0d7de;
+    color-scheme: light;
+  }
+}
+
+:root[data-theme="light"] {
+  --bg: #f6f8fa;
+  --bg-elevated: #ffffff;
+  --bg-card: #ffffff;
+  --fg: #1f2328;
+  --fg-muted: #656d76;
+  --accent: #0969da;
+  --accent-glow: rgba(9, 105, 218, 0.08);
+  --green: #1a7f37;
+  --border: #d0d7de;
+  color-scheme: light;
+}
+
+body {
+  background: var(--bg);
+  color: var(--fg);
+  font-family: var(--font-body);
+  line-height: 1.6;
+  padding-inline: 20px;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+
+.wrapper {
+  max-width: 960px;
+  margin: 0 auto;
+}
+
+/* Nav */
+nav {
+  position: sticky;
+  top: env(safe-area-inset-top, 0px);
+  z-index: 10;
+  background: var(--bg);
+  border-bottom: 1px solid var(--border);
+  padding: 16px 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.nav-logo {
+  font-family: var(--font-mono);
+  font-weight: 700;
+  font-size: 1.125rem;
+  color: var(--accent);
+  text-decoration: none;
+}
+
+.nav-logo span { color: var(--fg-muted); }
+
+.nav-links {
+  display: flex;
+  gap: 24px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.nav-links a {
+  color: var(--fg-muted);
+  text-decoration: none;
+  font-size: 0.875rem;
+  font-weight: 500;
+  transition: color 0.2s;
+}
+
+.nav-links a:hover { color: var(--accent); }
+
+/* Hero */
+.hero {
+  padding: 80px 0 60px;
+  max-width: 640px;
+}
+
+.hero-label {
+  font-family: var(--font-mono);
+  font-size: 0.8125rem;
+  color: var(--green);
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  margin-bottom: 16px;
+}
+
+.hero h1 {
+  font-size: clamp(2rem, 5vw, 3rem);
+  font-weight: 600;
+  line-height: 1.15;
+  margin: 0 0 20px;
+  text-wrap: balance;
+}
+
+.hero h1 em {
+  font-style: normal;
+  color: var(--accent);
+}
+
+.hero p {
+  font-size: 1.125rem;
+  color: var(--fg-muted);
+  margin: 0 0 32px;
+  max-width: 52ch;
+}
+
+.hero-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--accent);
+  color: #fff;
+  padding: 12px 28px;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 0.9375rem;
+  transition: opacity 0.2s;
+}
+
+.hero-cta:hover { opacity: 0.85; }
+
+/* Sections */
+section {
+  padding: 60px 0;
+}
+
+.section-label {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--fg-muted);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin-bottom: 8px;
+}
+
+section h2 {
+  font-size: 1.75rem;
+  font-weight: 600;
+  margin: 0 0 40px;
+  text-wrap: balance;
+}
+
+/* Services grid */
+.services-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 16px;
+}
+
+.service-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 28px 24px;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.service-card:hover {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 1px var(--accent), 0 8px 24px var(--accent-glow);
+}
+
+.service-icon {
+  width: 40px;
+  height: 40px;
+  background: var(--accent-glow);
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 16px;
+  font-size: 1.25rem;
+}
+
+.service-card h3 {
+  font-size: 1.0625rem;
+  font-weight: 600;
+  margin: 0 0 8px;
+}
+
+.service-card p {
+  color: var(--fg-muted);
+  font-size: 0.875rem;
+  margin: 0;
+  line-height: 1.5;
+}
+
+/* Process */
+.process-steps {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 24px;
+  counter-reset: step;
+}
+
+.process-step {
+  counter-increment: step;
+  position: relative;
+}
+
+.process-step::before {
+  content: counter(step, decimal-leading-zero);
+  font-family: var(--font-mono);
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--accent);
+  opacity: 0.3;
+  display: block;
+  margin-bottom: 12px;
+}
+
+.process-step h3 {
+  font-size: 1rem;
+  font-weight: 600;
+  margin: 0 0 6px;
+}
+
+.process-step p {
+  color: var(--fg-muted);
+  font-size: 0.8125rem;
+  margin: 0;
+}
+
+/* Tech stack */
+.tech-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.tech-list li {
+  font-family: var(--font-mono);
+  font-size: 0.8125rem;
+  padding: 6px 14px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  color: var(--fg-muted);
+  transition: color 0.2s, border-color 0.2s;
+}
+
+.tech-list li:hover {
+  color: var(--accent);
+  border-color: var(--accent);
+}
+
+/* Contact */
+.contact-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 12px;
+}
+
+.contact-link {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 16px 20px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  text-decoration: none;
+  color: var(--fg);
+  font-size: 0.9375rem;
+  font-weight: 500;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.contact-link:hover {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 1px var(--accent);
+}
+
+.contact-link .icon {
+  width: 36px;
+  height: 36px;
+  background: var(--accent-glow);
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.contact-link .icon svg {
+  width: 18px;
+  height: 18px;
+  fill: var(--accent);
+}
+
+.contact-link .label {
+  font-size: 0.75rem;
+  color: var(--fg-muted);
+}
+
+/* Footer */
+footer {
+  border-top: 1px solid var(--border);
+  padding: 32px 0;
+  text-align: center;
+  color: var(--fg-muted);
+  font-size: 0.8125rem;
+}
+
+footer span {
+  color: var(--accent);
+}
+
+@media (max-width: 600px) {
+  .hero { padding: 48px 0 40px; }
+  section { padding: 40px 0; }
+  .nav-links { gap: 16px; }
+}
+</style>
+
+<div class="wrapper">
+
+  <nav>
+    <a class="nav-logo" href="#">kevin<span>.dev</span></a>
+    <ul class="nav-links">
+      <li><a href="#servicios">Servicios</a></li>
+      <li><a href="#proceso">Proceso</a></li>
+      <li><a href="#tecnologias">Stack</a></li>
+      <li><a href="#contacto">Contacto</a></li>
+    </ul>
+  </nav>
+
+  <div class="hero">
+    <div class="hero-label">// disponible para proyectos</div>
+    <h1>Software a medida que <em>resuelve</em> problemas reales</h1>
+    <p>Desarrollo soluciones digitales adaptadas a las necesidades de tu negocio. Desde aplicaciones web hasta sistemas empresariales completos.</p>
+    <a class="hero-cta" href="#contacto">
+      Hablemos de tu proyecto
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </a>
+  </div>
+
+  <section id="servicios">
+    <div class="section-label">// servicios</div>
+    <h2>Lo que puedo construir para ti</h2>
+    <div class="services-grid">
+      <div class="service-card">
+        <div class="service-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2" stroke-linecap="round"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
+        </div>
+        <h3>Aplicaciones Web</h3>
+        <p>Plataformas web completas, dashboards administrativos, portales de clientes y sistemas SaaS listos para escalar.</p>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2" stroke-linecap="round"><rect x="5" y="2" width="14" height="20" rx="2"/><path d="M12 18h.01"/></svg>
+        </div>
+        <h3>Apps Móviles</h3>
+        <p>Aplicaciones nativas y multiplataforma para iOS y Android que tus usuarios van a querer usar todos los días.</p>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2" stroke-linecap="round"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+        </div>
+        <h3>Sistemas Empresariales</h3>
+        <p>ERP, CRM y sistemas internos diseñados para optimizar los procesos de tu empresa desde cero.</p>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2" stroke-linecap="round"><path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"/><path d="M4 22v-7"/></svg>
+        </div>
+        <h3>APIs e Integraciones</h3>
+        <p>Conexión entre tus sistemas existentes, integración con servicios de terceros y desarrollo de APIs robustas.</p>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2" stroke-linecap="round"><path d="M12 20V10"/><path d="M18 20V4"/><path d="M6 20v-4"/></svg>
+        </div>
+        <h3>Automatización</h3>
+        <p>Automatizo tareas repetitivas, flujos de trabajo y procesos manuales para que tu equipo se enfoque en lo importante.</p>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 015.83 1c0 2-3 3-3 3"/><path d="M12 17h.01"/></svg>
+        </div>
+        <h3>Consultoría Técnica</h3>
+        <p>Te ayudo a tomar las mejores decisiones tecnológicas para tu proyecto. Arquitectura, stack y estrategia de desarrollo.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="proceso">
+    <div class="section-label">// cómo trabajo</div>
+    <h2>Del problema a la solución</h2>
+    <div class="process-steps">
+      <div class="process-step">
+        <h3>Escucho</h3>
+        <p>Entiendo tu negocio, tus usuarios y el problema que necesitas resolver.</p>
+      </div>
+      <div class="process-step">
+        <h3>Diseño</h3>
+        <p>Propongo una solución técnica clara con alcance, tiempos y costos definidos.</p>
+      </div>
+      <div class="process-step">
+        <h3>Desarrollo</h3>
+        <p>Construyo el software con entregas parciales para que veas avances reales.</p>
+      </div>
+      <div class="process-step">
+        <h3>Entrego</h3>
+        <p>Despliego, capacito y doy soporte para que todo funcione sin fricciones.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="tecnologias">
+    <div class="section-label">// tecnologías</div>
+    <h2>Stack tecnológico</h2>
+    <ul class="tech-list">
+      <li>JavaScript</li>
+      <li>TypeScript</li>
+      <li>React</li>
+      <li>Node.js</li>
+      <li>Python</li>
+      <li>C#</li>
+      <li>.NET</li>
+      <li>SQL Server</li>
+      <li>PostgreSQL</li>
+      <li>MongoDB</li>
+      <li>Azure</li>
+      <li>AWS</li>
+      <li>Docker</li>
+      <li>Git</li>
+      <li>REST APIs</li>
+      <li>GraphQL</li>
+    </ul>
+  </section>
+
+  <section id="contacto">
+    <div class="section-label">// contacto</div>
+    <h2>Hablemos de tu proyecto</h2>
+    <div class="contact-grid">
+      <a class="contact-link" href="https://wa.me/TUNUMERO" target="_blank" rel="noopener">
+        <div class="icon">
+          <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51l-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 2C6.477 2 2 6.477 2 12c0 1.89.525 3.66 1.438 5.168L2 22l4.832-1.438A9.955 9.955 0 0012 22c5.523 0 10-4.477 10-10S17.523 2 12 2zm0 18a8 8 0 01-4.264-1.222l-.306-.182-2.894.86.86-2.894-.182-.306A8 8 0 1112 20z"/></svg>
+        </div>
+        <div>
+          <div>WhatsApp</div>
+          <div class="label">Respuesta rápida</div>
+        </div>
+      </a>
+      <a class="contact-link" href="https://facebook.com/TUPAGINA" target="_blank" rel="noopener">
+        <div class="icon">
+          <svg viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+        </div>
+        <div>
+          <div>Facebook</div>
+          <div class="label">Sígueme</div>
+        </div>
+      </a>
+      <a class="contact-link" href="https://linkedin.com/in/TUPERFIL" target="_blank" rel="noopener">
+        <div class="icon">
+          <svg viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+        </div>
+        <div>
+          <div>LinkedIn</div>
+          <div class="label">Conectemos</div>
+        </div>
+      </a>
+      <a class="contact-link" href="https://github.com/TUUSUARIO" target="_blank" rel="noopener">
+        <div class="icon">
+          <svg viewBox="0 0 24 24"><path d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0112 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"/></svg>
+        </div>
+        <div>
+          <div>GitHub</div>
+          <div class="label">Mi código</div>
+        </div>
+      </a>
+      <a class="contact-link" href="mailto:tu@email.com">
+        <div class="icon">
+          <svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+        </div>
+        <div>
+          <div>Email</div>
+          <div class="label">Escríbeme</div>
+        </div>
+      </a>
+    </div>
+  </section>
+
+  <footer>
+    <p>&copy; 2026 <span>kevin.dev</span> — Software a medida</p>
+  </footer>
+
+</div>
