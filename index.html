@@ -356,6 +356,7 @@ section h2 {
   border: 1px solid var(--border);
   border-radius: 10px;
   padding: 24px;
+  opacity: 0;
   transition: border-color 0.3s, box-shadow 0.3s, transform 0.3s;
 }
 
@@ -415,6 +416,7 @@ section h2 {
   border-radius: 10px;
   padding: 24px;
   position: relative;
+  opacity: 0;
   transition: border-color 0.3s, transform 0.3s;
 }
 
@@ -564,6 +566,7 @@ section h2 {
   color: var(--fg);
   font-size: 0.9375rem;
   font-weight: 500;
+  opacity: 0;
   transition: border-color 0.3s, box-shadow 0.3s, transform 0.3s;
 }
 
@@ -848,7 +851,28 @@ footer strong {
   <p>&copy; 2026 <strong>KALB Dev</strong> — Soluciones de Software &middot; Desarrollo Ágil</p>
 </footer>
 
+<script src="https://cdn.jsdelivr.net/npm/motion@12.12.1/dist/motion.js"></script>
+
 <script>
+const { animate, stagger, inView, scroll } = Motion;
+
+inView('.service-card', (el) => {
+  animate(el, { opacity: [0, 1], y: [30, 0] }, { duration: 0.5, delay: stagger(0.1) });
+}, { margin: '-50px' });
+
+inView('.process-step', (el) => {
+  animate(el, { opacity: [0, 1], y: [30, 0] }, { duration: 0.5, delay: stagger(0.15) });
+}, { margin: '-50px' });
+
+inView('.contact-link', (el) => {
+  animate(el, { opacity: [0, 1], y: [20, 0] }, { duration: 0.4, delay: stagger(0.1) });
+}, { margin: '-50px' });
+
+inView('.tech-list', (el) => {
+  const items = el.querySelectorAll('li');
+  animate(items, { opacity: [0, 1], scale: [0.8, 1] }, { duration: 0.3, delay: stagger(0.04) });
+}, { margin: '-50px' });
+
 const observer = new IntersectionObserver((entries) => {
   entries.forEach((entry, i) => {
     if (entry.isIntersecting) {
